@@ -4,14 +4,16 @@ module.exports = {
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest --coverage --verbose",
+		"test": "jest",
 		"test:watch": "jest --watchAll --coverage --verbose",
 		"test:coverage": "jest --collectCoverage --verbose",
-		"lint": "eslint \"**/*.js\" --ignore-pattern node_modules/",
-		"lint:fix": "eslint \"**/*.js\" --fix --ignore-pattern node_modules/"
-	},
+		"lint": "eslint \"**/*.js\"",
+		"lint:fix": "eslint \"**/*.js\" --fix"
+    },
+    "eslintIgnore": ["node_modules/", "commitlint.config.js"],
 	"husky": {
 	    "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
 			"pre-commit": "npm test && npm run lint",
 			"pre-push": "npm test"
 	    }

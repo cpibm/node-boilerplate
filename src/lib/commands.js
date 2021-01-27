@@ -1,4 +1,5 @@
 const util = require('util');
+const chalk = require('chalk');
 const exec = util.promisify(require('child_process').exec);
 const { mkdir } = require('./utils');
 
@@ -12,7 +13,11 @@ async function createGithubRepo(repository) {
 
 async function createLocalRepo(workdir) {
     await mkdir(workdir);
-    return run(`git init && git symbolic-ref HEAD refs/heads/main`, { cwd: workdir });
+    return run(`git init`, { cwd: workdir });
+}
+
+async function useMainBranch(workdir) {
+    return run('git symbolic-ref HEAD refs/heads/main', { cwd: workdir });
 }
 
 async function initialCommit(workdir, message) {
@@ -26,7 +31,8 @@ async function runTests(workdir) {
 }
 
 async function openEditor(workdir) {
-    console.log('Opening VSCode on your project folder.');
+    console.log(chalk.green('Everything went great'), '😁');
+    console.log(chalk.bold.green('Opening VSCode on your project folder'), '⌨️');
     return run(`code ${workdir}`);
 }
 
@@ -37,6 +43,7 @@ async function npmInstall(workdir, extraPackages = []) {
         'eslint',
         'eslint-config-airbnb-base',
         'eslint-config-prettier',
+        'eslint-plugin-import',
         'eslint-plugin-jest',
         'eslint-plugin-node',
         'eslint-plugin-prettier',
@@ -55,4 +62,5 @@ module.exports = {
     npmInstall,
     runTests,
     openEditor,
+    useMainBranch,
 }

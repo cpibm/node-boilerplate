@@ -53,6 +53,7 @@ class Boilerplate {
         } else {
             await commands.createLocalRepo(this.workdir);
         }
+        await commands.useMainBranch(this.workdir);
         await files.writeGitignore(this.workdir);
         await commands.initialCommit(this.workdir, this.config.git);
         this.spinnies.succeed('repo-spin');

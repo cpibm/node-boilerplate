@@ -25,6 +25,7 @@ async function initialCommit(workdir, message) {
 }
 
 async function runTests(workdir) {
+    await run(`npm run lint:fix`, { cwd: workdir });
     const { stdout, stderr } = await run(`npm run test`, { cwd: workdir });
     console.log(stdout);
     console.log(stderr);

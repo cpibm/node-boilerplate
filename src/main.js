@@ -46,7 +46,7 @@ class Boilerplate {
 		const msg = chalk.white('Creating repository: ') + chalk.yellow(this.repository);
 		this.spinnies.add('repo-spin', { text: msg, indent: 2 });
 
-		if (this.config.github) {
+		if (this.config.gh) {
 			await commands.createGithubRepo(this.repository);
 		} else {
 			await commands.createLocalRepo(this.workdir);

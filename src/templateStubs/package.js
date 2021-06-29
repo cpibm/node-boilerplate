@@ -8,14 +8,13 @@ module.exports = {
 		'test:watch': 'jest --watchAll --coverage --verbose',
 		'test:coverage': 'jest --collectCoverage --verbose',
 		lint: 'eslint "**/*.js"',
-		'lint:fix': 'eslint "**/*.js" --fix',
+		fix: 'eslint "**/*.js" --fix',
 	},
 	eslintIgnore: ['node_modules/', 'commitlint.config.js'],
 	husky: {
 		hooks: {
 			'commit-msg': 'commitlint -E HUSKY_GIT_PARAMS',
 			'pre-commit': 'npm test && npm run lint',
-			'pre-push': 'npm test',
 		},
 	},
 	repository: {
@@ -24,6 +23,7 @@ module.exports = {
 	},
 	jest: {
 		testEnvironment: 'node',
+		coverageReporters: ['lcov', 'text'],
 		coveragePathIgnorePatterns: ['/node_modules/'],
 		testResultsProcessor: 'jest-sonar-reporter',
 	},

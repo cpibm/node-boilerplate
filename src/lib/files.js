@@ -8,7 +8,7 @@ const templateDir = path.resolve(__dirname, '..', 'templateStubs');
 async function writeTravisConfig(workdir) {
 	const travis = require('../templateStubs/travis');
 
-	const file = path.join(workdir, '.travis.yaml');
+	const file = path.join(workdir, '.travis.yml');
 	return fs.writeFile(file, yaml.dump(travis), 'utf8');
 }
 
@@ -43,7 +43,11 @@ async function writeDummyFiles(workdir) {
 
 async function writeExtraFiles(workdir) {
 	await fs.copyFile(path.join(templateDir, 'commitlint.config.js'), path.join(workdir, 'commitlint.config.js'));
+	await fs.copyFile(path.join(templateDir, 'sonar-project.properties'), path.join(workdir, 'sonar-project.properties'));
 	await fs.copyFile(path.join(templateDir, 'README.md'), path.join(workdir, 'README.md'));
+	await fs.copyFile(path.join(templateDir, 'TECH_DEBT.md'), path.join(workdir, 'TECH_DEBT.md'));
+	await fs.copyFile(path.join(templateDir, 'USER_STORIES.md'), path.join(workdir, 'USER_STORIES.md'));
+	await fs.copyFile(path.join(templateDir, 'NOTES.md'), path.join(workdir, 'NOTES.md'));
 }
 
 module.exports = {

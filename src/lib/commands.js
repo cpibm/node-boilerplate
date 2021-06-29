@@ -39,8 +39,10 @@ async function openEditor(workdir) {
 
 async function npmInstall(workdir, extraPackages = []) {
 	const packages = [
-		'husky',
+		'husky@4',
 		'jest',
+		'@commitlint/config-conventional',
+		'@commitlint/cli',
 		'eslint',
 		'eslint-config-airbnb-base',
 		'eslint-config-prettier',

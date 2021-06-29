@@ -4,5 +4,13 @@ module.exports = {
 	cache: {
 		directories: ['node_modules/'],
 	},
-	script: ['npm run lint', 'npm run test:coverage'],
+	script: ['npm run lint', 'npm run test:coverage', 'sonar-scanner'],
+	addons: {
+		sonarcloud: {
+			organization: 'cpibm',
+			token: {
+				secure: 'encrypted value of your token',
+			},
+		},
+	},
 };

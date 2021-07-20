@@ -75,6 +75,7 @@ class Boilerplate {
 	async installPackages() {
 		const msg = chalk.white('Installing NPM packages...');
 		this.spinnies.add('npm-spin', { text: msg, indent: 2 });
+		await commands.npmInstallDev(this.workdir);
 		await commands.npmInstall(this.workdir);
 		this.spinnies.succeed('npm-spin');
 	}

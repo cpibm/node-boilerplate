@@ -25,7 +25,7 @@ async function initialCommit(workdir, message) {
 }
 
 async function runTests(workdir) {
-	await run(`npm run lint:fix`, { cwd: workdir });
+	await run(`npm run fix`, { cwd: workdir });
 	const { stdout, stderr } = await run(`npm run test`, { cwd: workdir });
 	console.log(stdout);
 	console.log(stderr);
@@ -37,7 +37,7 @@ async function openEditor(workdir) {
 	return run(`code ${workdir}`);
 }
 
-async function npmInstall(workdir, extraPackages = []) {
+async function npmInstallDev(workdir, extraPackages = []) {
 	const packages = [
 		'husky@4',
 		'jest',
@@ -58,10 +58,17 @@ async function npmInstall(workdir, extraPackages = []) {
 	return run(`npm install --save-dev ${packages.join(' ')}`, { cwd: workdir });
 }
 
+async function npmInstall(workdir, extraPackages = []) {
+	const packages = ['express', ...extraPackages];
+
+	return run(`npm install --save ${packages.join(' ')}`, { cwd: workdir });
+}
+
 module.exports = {
 	createGithubRepo,
 	createLocalRepo,
 	initialCommit,
+	npmInstallDev,
 	npmInstall,
 	runTests,
 	openEditor,
